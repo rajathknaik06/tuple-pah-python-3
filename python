@@ -1,0 +1,59 @@
+""" Emerson is analyzing two sets of survey data, each containing different numbers of respondents. He wants to compare these sets by filtering out only the even numbers from the first set and only the odd numbers from the second set. Emerson then needs to find the symmetric difference between these filtered sets and calculate its sum. He will display the results sorted in ascending order.
+
+
+
+Help Emerson by writing a program using sets.
+
+Input format :
+The first line of input consists of a list of integers separated by spaces, representing the elements of the first set.
+
+The second line of input consists of a list of integers separated by spaces, representing the elements of the second set.
+
+Output format :
+The first line of output displays the sorted elements of the filtered first set.
+
+The second line of output displays the sorted elements of the filtered second set.
+
+The third line of output displays the sorted elements of the symmetric difference between the filtered sets.
+
+The fourth line of output displays the sum of the symmetric difference."""
+
+# Read input
+first_set = list(map(int, input().split()))
+second_set = list(map(int, input().split()))
+
+# Convert lists to sets
+first_set = set(first_set)
+second_set = set(second_set)
+
+# Filter the first set to keep only even numbers
+filtered_first_set = set()
+for x in first_set:
+    if x % 2 == 0:
+        filtered_first_set.add(x)
+
+# Filter the second set to keep only odd numbers
+filtered_second_set = set()
+for x in second_set:
+    if x % 2 != 0:
+        filtered_second_set.add(x)
+
+# Find the symmetric difference of the filtered sets
+symmetric_difference = (filtered_first_set - filtered_second_set) | (filtered_second_set - filtered_first_set)
+
+# Calculate the sum of the elements in the symmetric difference
+sum_symmetric_difference = sum(symmetric_difference)
+
+# Add this sum as a new element to one of the original sets (chosen randomly)
+# Use a simple method to simulate randomness without using imports
+random_choice = (len(first_set) % 2 == 0)  # A simple method to choose a set based on length parity
+if random_choice:
+    first_set.add(sum_symmetric_difference)
+else:
+    second_set.add(sum_symmetric_difference)
+
+# Print the results, sorted
+print(sorted(filtered_first_set))
+print(sorted(filtered_second_set))
+print(sorted(symmetric_difference))
+print(sum_symmetric_difference)
